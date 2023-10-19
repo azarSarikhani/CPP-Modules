@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:59:36 by asarikha          #+#    #+#             */
-/*   Updated: 2023/09/19 10:38:37 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:25:20 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void ScalarConverter::printChar(std::string  &arg, ScalarConverter::data_type /*
 	default:
 		break;
 	}
-	if ( !isInRange(arg, character) || type == floating_point || type == double_float ){
+	if ( !isInRange(arg, character) ){
 		std::cout << "impossible" ;
 	}
 	else if ( isInRange(arg, character) && !std::isprint(c)){

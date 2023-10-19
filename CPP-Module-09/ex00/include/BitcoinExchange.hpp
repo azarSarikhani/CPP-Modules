@@ -6,13 +6,14 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 14:16:38 by asarikha          #+#    #+#             */
-/*   Updated: 2023/09/28 15:58:29 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:41:37 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BITCOIN_EXCHANGE_HPP
 # define BITCOIN_EXCHANGE_HPP
 
+#include <string>
 # include <iostream>
 # include <map>
 # include <fstream>
@@ -24,7 +25,7 @@ class  BitcoinExchange
 private:
 	static const std::string data_file;
 
-	std::map<std::string, float> data_;
+	std::map<std::string, std::string> data_;
 	
 public:
 	BitcoinExchange();
@@ -33,7 +34,11 @@ public:
 	~ BitcoinExchange();
 
 	void	parseData(void);
-	//void	parseInput(std::string inputFile);
+	void	parseInput(const std::string &inputFile);
+	bool	isDateInCorrectFormatAndValid(const std::string &date);
+    bool	isRateInCorrectFormat(const std::string& rate);
+	float	getRateFromDataBase(const std::string& date);
+	float	ft_stof(const std::string& str);
 };
 
 
