@@ -5,28 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 14:33:19 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/20 11:02:34 by asarikha         ###   ########.fr       */
+/*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
+/*   Updated: 2023/10/20 11:13:29 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
-using std::cerr;
+#include "RPN.hpp"
 
-int main(int argc, char**argv){
+int main (int argc, char* argv[]){
 	if (argc != 2)
-		return (std::cout << "BitcoinExchange must recieve an input file as argument" << std::endl, 0);
-	BitcoinExchange bitcoinExchange;
-
-	(void)argv;
-
-	try {
-		bitcoinExchange.parseData();
-		bitcoinExchange.parseInput(argv[1]);
+		return (std::cout << "RPN must recieve arguments." << std::endl, 0);
+	RPN rpn;
+	std::string input = argv[1];
+	try
+	{
+		rpn.validateInput(input);
+		rpn.calculateResult(input);
+		
 	}
-	catch (std::exception &e) {
-		cerr << e.what() << std::endl; //std::cout ?
-		return (1);
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
 	}
+	
 	return 0;
 }

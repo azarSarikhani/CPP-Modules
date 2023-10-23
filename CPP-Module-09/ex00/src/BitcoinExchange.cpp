@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 10:50:50 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/19 13:49:16 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/23 10:50:33 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ BitcoinExchange::~ BitcoinExchange(){
 
 float BitcoinExchange::ft_stof(const std::string& str)
 {
-	// for ( std::string::const_iterator it = str.begin(); it != str.end(); it++){
-	// 	if ( !std::isdigit(*it) && *it != '.')
-	// 		return -1;
-	// }
-	//std::cout << "str : " << str <<std::endl;
     float num;
     std::stringstream ss(str);
 
@@ -129,6 +124,10 @@ float BitcoinExchange::getRateFromDataBase(const std::string& date)
         //return ft_stof(this->data_.at(date));
 		return ft_stof(this->data_[date]);
 	}
+	if (this->data_.lower_bound(date) == this->data_.begin()){
+		return -1;
+	}
+	
     return ft_stof((--this->data_.lower_bound(date))->second);
 }
 
@@ -157,7 +156,7 @@ void	BitcoinExchange::parseInput(const std::string &inputFile){
 			continue ;
 		}
 		float num = ft_stof(rate);
-		if (num >= std::numeric_limits<int>::max()){
+		if (num > 1000){
 			std::cerr << "Error: too large a number." << std::endl;
 			continue ;
 		}
@@ -165,6 +164,11 @@ void	BitcoinExchange::parseInput(const std::string &inputFile){
 			std::cerr << "Error: not a positive number." << std::endl;
 			continue ;
 		}
-		std::cout << date << " => " << num << " = " << std::setprecision(2) << num * this->getRateFromDataBase(date) << std::endl;		
+		float Rate = getRateFromDataBase(date);
+		if (  Rate < 0 ){
+			std::cerr << "Error: bad date" << std::endl;
+			continue ;
+		}
+		std::cout << date << " => " << num << " = " << std::fixed << std::setprecision(2) << num * Rate << std::endl;		
     }
 }
