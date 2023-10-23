@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 10:50:50 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/23 10:50:33 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:01:21 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ bool	BitcoinExchange::isRateInCorrectFormat(const std::string& rate){
 }
 
 
-void BitcoinExchange::parseData(void) {
+void BitcoinExchange::parseData(void) {  //data[key] = value;
 	std::ifstream	infile;
 	std::string		line;
 

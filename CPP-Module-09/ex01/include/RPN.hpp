@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 10:59:53 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/23 10:34:59 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:22:54 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include <string>
 #include <iostream>
 #include <stack>
-# include <sstream>
+#include <sstream>
+#include <limits>
 
 class RPN
 {
