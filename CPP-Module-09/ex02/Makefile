@@ -6,16 +6,16 @@
 #    By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/14 13:29:59 by asarikha          #+#    #+#              #
-#    Updated: 2023/09/25 12:58:14 by asarikha         ###   ########.fr        #
+#    Updated: 2023/10/24 12:56:01 by asarikha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = easyFind
+NAME = PmergeMe
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 COMPILE = $(CC) $(FLAGS)
 
-FILES = main 
+FILES = main PmergeMe
 SRC_PATH	= src/
 SRC = $(FILES:=.cpp)
 SRCS = $(addprefix $(SRC_PATH),$(SRC))

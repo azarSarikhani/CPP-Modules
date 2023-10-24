@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azarsarikhani <azarsarikhani@student.42    +#+  +:+       +#+        */
+/*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:17:54 by asarikha          #+#    #+#             */
-/*   Updated: 2023/08/16 10:57:00 by azarsarikha      ###   ########.fr       */
+/*   Updated: 2023/10/24 16:14:58 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int	replace(std::string toFind, std::string toReplace, std::string infile, std::
 		return (EXIT_FAILURE);
 	}
 	outfile.open(((infile) + ".replace").c_str());
-	if (outfile.fail())
+	if (outfile.fail()){
+		std::cerr << "Replace file can not be opened!" << std::endl;
 		return (EXIT_FAILURE);
+	}
 	for (int i = 0; i < (int)str.size(); i++)
 	{
 		pos = str.find(toFind, i);
