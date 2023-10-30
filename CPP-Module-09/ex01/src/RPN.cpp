@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/23 15:44:18 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:36:53 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ RPN::~RPN()
 int RPN::ft_stoi(const std::string& str)
 {
     int num;
-    std::stringstream ss(str);
+    std::istringstream ss(str);
 
     ss >> num;
     return num;

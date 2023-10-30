@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:38 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/24 16:06:35 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:02:45 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,43 @@ static void printVec(std::vector<unsigned int>& vec)
 	std::cout << std::endl;
 }
 
+static std::vector<unsigned int> mergeVecs(std::vector<unsigned int>& left, std::vector<unsigned int>& right)
+{
+    std::vector<unsigned int> result;
+
+    // Merge the two vectors until one of them becomes empty
+    while (!left.empty() && !right.empty())
+	{
+        if (left.front() <= right.front())
+		{
+            result.push_back(left.front());
+            left.erase(left.begin());
+        }
+		else
+		{
+            result.push_back(right.front());
+            right.erase(right.begin());
+        }
+    }
+
+    // Add any remaining elements from the left vector
+    while (!left.empty())
+	{
+        result.push_back(left.front());
+        left.erase(left.begin());
+    }
+
+    // Add any remaining elements from the right vector
+    while (!right.empty())
+	{
+        result.push_back(right.front());
+        right.erase(right.begin());
+    }
+    return result;
+}
+
 static std::vector<unsigned int> mergeInsertVec(std::vector<unsigned int>& vec) {
+	
     // Base case: a vector with zero or one elements is already sorted
     if (vec.size() <= 1) {
         return vec;
@@ -75,8 +111,7 @@ void PmergeMe::sortVec(int argc, char **argv){
 	printVec(storage);
 
 	std::clock_t start = std::clock();
-	std::cout << "start " << start << " / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND " << start / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND << std::endl;
-	//storage = mergeInsertVec(storage);
+	storage = mergeInsertVec(storage);
 
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 
@@ -96,6 +131,66 @@ static void printList(std::list<unsigned int>& lst)
 	std::cout << std::endl;
 }
 
+static std::list<unsigned int> mergeLists(std::list<unsigned int>& left, std::list<unsigned int>& right)
+{
+    std::list<unsigned int> result;
+
+    // Merge the two vectors until one of them becomes empty
+    while (!left.empty() && !right.empty())
+	{
+        if (left.front() <= right.front())
+		{
+            result.push_back(left.front());
+            left.erase(left.begin());
+        }
+		else
+		{
+            result.push_back(right.front());
+            right.erase(right.begin());
+        }
+    }
+
+    // Add any remaining elements from the left vector
+    while (!left.empty())
+	{
+        result.push_back(left.front());
+        left.erase(left.begin());
+    }
+
+    // Add any remaining elements from the right vector
+    while (!right.empty())
+	{
+        result.push_back(right.front());
+        right.erase(right.begin());
+    }
+    return result;
+}
+
+static std::list<unsigned int> mergeInsertList(std::list<unsigned int>& lst) {
+    // Base case: a list with zero or one elements is already sorted
+    if (lst.size() <= 1) {
+        return lst;
+    }
+
+    // Divide the list into two halves
+    int mid = lst.size() / 2;
+	std::list<unsigned int> left;
+	std::list<unsigned int> right;
+
+    for (int i = 0; i < mid; i++) {
+        left.push_back(lst.front());
+        lst.pop_front();
+    }
+    right = lst;
+
+    // Recursively sort the left and right halves
+    left = mergeInsertList(left);
+    right = mergeInsertList(right);
+
+    // Merge the sorted halves
+    return mergeLists(left, right);
+}
+
 void PmergeMe::sortList(int argc, char **argv){
 	
 	std::list<unsigned int> storage;
@@ -108,7 +203,7 @@ void PmergeMe::sortList(int argc, char **argv){
 
 	std::clock_t start = std::clock();
 
-	//storage = mergeInsertList(storage);
+	storage = mergeInsertList(storage);
 
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 

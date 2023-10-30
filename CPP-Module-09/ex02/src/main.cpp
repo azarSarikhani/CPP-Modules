@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:35 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/24 15:31:50 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:02:26 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 unsigned int ft_stou(const std::string& str)
 {
+    if (str.length() > 10)
+        throw (std::invalid_argument ( "input should be whithin the range of unsigned int" ));
     unsigned int num;
     std::stringstream ss(str);
 
     ss >> num;
+    
+    unsigned int unsignedInteger = num;
+    std::stringstream checkSS;
+	checkSS << unsignedInteger;
+    if ( checkSS.str().compare ( str ) != 0 )
+        throw (std::invalid_argument ( "input should be whithin the range of unsigned int" ) );
     return num;
 }
 
@@ -44,7 +52,6 @@ int main ( int argc, char* argv[] ){
             for (itr2 = itr + 1; itr2 != temp.end(); itr2++){
                 if (*itr2 == *itr)
 			        throw (std::invalid_argument ( "Duplicates not allowed" ));
-			    std::cout << " *itr2 : " << *itr2 << std::endl;
             }
         }
     }
