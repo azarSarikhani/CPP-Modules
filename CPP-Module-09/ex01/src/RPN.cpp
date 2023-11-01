@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/26 13:36:53 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:44:50 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ void	RPN::calculateResult(std::string& input){
                         throw (std::runtime_error ("Division by zero is not possible!"));
                 break;
                 case '*':
-                    if ( right != 0 && std::numeric_limits<int>::max() / right < left )
+                    if ( right > 0 && std::numeric_limits<int>::max() / right < left )
+                            throw (std::overflow_error ("RPN has overflowed try again with less operations!"));
+                    else if ( right < 0 && std::numeric_limits<int>::min() / right < left )
                             throw (std::overflow_error ("RPN has overflowed try again with less operations!"));
                     else
                         result =  left * right ;

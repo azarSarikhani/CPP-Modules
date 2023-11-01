@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:35 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/30 09:02:26 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:50:24 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,24 @@ int main ( int argc, char* argv[] ){
             temp.push_back(ft_stou(argv[i]));
         }
 
-        std::vector<unsigned int>::iterator itr;
-        std::vector<unsigned int>::iterator itr2;
-        for (itr = temp.begin(); itr != temp.end(); itr++)
-        {
-            for (itr2 = itr + 1; itr2 != temp.end(); itr2++){
-                if (*itr2 == *itr)
-			        throw (std::invalid_argument ( "Duplicates not allowed" ));
-            }
-        }
+        // std::vector<unsigned int>::iterator itr;
+        // std::vector<unsigned int>::iterator itr2;
+        // for (itr = temp.begin(); itr != temp.end(); itr++)
+        // {
+        //     for (itr2 = itr + 1; itr2 != temp.end(); itr2++){
+        //         if (*itr2 == *itr)
+		// 	        throw (std::invalid_argument ( "Duplicates not allowed" ));
+        //     }
+        // }
     }
     catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;
     }
 	pmm.sortVec(argc, argv);
+    // merge_insert_vec(int_vec, 0, int_vec.size() - 1); // -1 because last element is unpaired
     std::cout << std::endl;
     pmm.sortList(argc, argv);
+    // merge_insert_list(int_list, 0, int_list.size() - 1); // -1 because last element is unpaired in insertion sort
 	return 0;
 }

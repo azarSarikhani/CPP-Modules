@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:38 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/30 09:02:45 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:45:28 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,59 +44,82 @@ static void printVec(std::vector<unsigned int>& vec)
 	std::cout << std::endl;
 }
 
-static std::vector<unsigned int> mergeVecs(std::vector<unsigned int>& left, std::vector<unsigned int>& right)
+static void mergeVec(std::vector<unsigned int>& vec, int start , int mid, int end)
 {
-    std::vector<unsigned int> result;
+    int n1 = mid - start + 1; 
+	int n2 = end - mid; 
 
-    // Merge the two vectors until one of them becomes empty
-    while (!left.empty() && !right.empty())
+	std::vector<int> Left(n1); // two arrays for sorting
+	std::vector<int> Right(n2);
+
+	// copy from start to mid into left
+	for (int i = 0; i < n1; i++)
 	{
-        if (left.front() <= right.front())
+		Left[i] = vec[start + i];
+	}
+
+    // copy from mid to end into right
+	for (int i = 0; i < n2; i++)
+	{
+		Right[i] = vec[mid + 1 + i];
+	}
+
+	int RIDX = 0;
+	int LIDX = 0;
+
+	for (int i = start; i <= end; i++) // sorting+merging the split arrays into vec, starts each round at 0
+	{
+		if (RIDX == n2)
 		{
-            result.push_back(left.front());
-            left.erase(left.begin());
-        }
+			vec[i] = Left[LIDX];
+			LIDX++;
+		}
+		else if (LIDX == n1)
+		{
+			vec[i] = Right[RIDX];
+			RIDX++;
+		}
+		else if (Right[RIDX] > Left[LIDX])
+		{
+			vec[i] = Left[LIDX];
+			LIDX++;
+		}
 		else
 		{
-            result.push_back(right.front());
-            right.erase(right.begin());
-        }
-    }
-
-    // Add any remaining elements from the left vector
-    while (!left.empty())
-	{
-        result.push_back(left.front());
-        left.erase(left.begin());
-    }
-
-    // Add any remaining elements from the right vector
-    while (!right.empty())
-	{
-        result.push_back(right.front());
-        right.erase(right.begin());
-    }
-    return result;
+			vec[i] = Right[RIDX];
+			RIDX++;
+		}
+	}
 }
 
-static std::vector<unsigned int> mergeInsertVec(std::vector<unsigned int>& vec) {
-	
-    // Base case: a vector with zero or one elements is already sorted
-    if (vec.size() <= 1) {
-        return vec;
-    }
+static void insertionSortVec(std::vector<unsigned int>& vec, int start, int end ) {
+    
+    for (int i = start; i < end; i++)
+	{
+        unsigned int tempVal = vec[i + 1];
+        int j = i + 1;
+        while (j > start && vec[j - 1] > tempVal) // if curr pos is bigger than next pos
+		{
+            vec[j] = vec[j - 1];
+            j--; // count down till 0
+        }
+        vec[j] = tempVal;
+	}
+}
 
-    // Divide the vector into two halves
-    int mid = vec.size() / 2;
-    std::vector<unsigned int> left(vec.begin(), vec.begin() + mid);
-    std::vector<unsigned int> right(vec.begin() + mid, vec.end());
-
-    // Recursively sort the left and right halves
-    left = mergeInsertVec(left);
-    right = mergeInsertVec(right);
-
-    // Merge the sorted halves
-    return mergeVecs(left, right);
+static void mergeInsertVec(std::vector<unsigned int>& vec, int start, int end ) {
+		
+	if (end - start > 2)
+	{
+		int mid = (start + end) / 2;
+		mergeInsertVec(vec, start, mid);
+		mergeInsertVec(vec, mid + 1, end); 
+		mergeVec(vec, start, mid, end); // merge sort
+	}
+	else
+	{
+		insertionSortVec(vec, start, end);
+	}
 }
 
 void PmergeMe::sortVec(int argc, char **argv){
@@ -111,8 +134,8 @@ void PmergeMe::sortVec(int argc, char **argv){
 	printVec(storage);
 
 	std::clock_t start = std::clock();
-	storage = mergeInsertVec(storage);
-
+	mergeInsertVec(storage, 0, storage.size() - 1);
+    // merge_insert_vec(storage, 0, int_vec.size() - 1);
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 
 	std::cout << "<vec>After: ";
@@ -131,64 +154,97 @@ static void printList(std::list<unsigned int>& lst)
 	std::cout << std::endl;
 }
 
-static std::list<unsigned int> mergeLists(std::list<unsigned int>& left, std::list<unsigned int>& right)
-{
-    std::list<unsigned int> result;
-
-    // Merge the two vectors until one of them becomes empty
-    while (!left.empty() && !right.empty())
-	{
-        if (left.front() <= right.front())
-		{
-            result.push_back(left.front());
-            left.erase(left.begin());
+static std::list<unsigned int>::iterator advance(std::list<unsigned int>::iterator it, int n) {
+    if (n > 0) {
+        for (int i = 0; i < n; ++i) {
+            ++it;
         }
-		else
-		{
-            result.push_back(right.front());
-            right.erase(right.begin());
+    } else if (n < 0) {
+        for (int i = 0; i > n; --i) {
+            --it;
         }
     }
-
-    // Add any remaining elements from the left vector
-    while (!left.empty())
-	{
-        result.push_back(left.front());
-        left.erase(left.begin());
-    }
-
-    // Add any remaining elements from the right vector
-    while (!right.empty())
-	{
-        result.push_back(right.front());
-        right.erase(right.begin());
-    }
-    return result;
+	return it;
 }
 
-static std::list<unsigned int> mergeInsertList(std::list<unsigned int>& lst) {
-    // Base case: a list with zero or one elements is already sorted
-    if (lst.size() <= 1) {
-        return lst;
-    }
+static void mergeList(std::list<unsigned int>& list, int start , int mid, int end){
 
-    // Divide the list into two halves
-    int mid = lst.size() / 2;
-	std::list<unsigned int> left;
-	std::list<unsigned int> right;
+	int n1 = mid - start + 1; 
+	int n2 = end - mid;
 
-    for (int i = 0; i < mid; i++) {
-        left.push_back(lst.front());
-        lst.pop_front();
-    }
-    right = lst;
+	std::list<int> Left; // two arrays for sorting
+	std::list<int> Right;
 
-    // Recursively sort the left and right halves
-    left = mergeInsertList(left);
-    right = mergeInsertList(right);
+	// fill the halfes with the numbers (0 till half and half till end)
+	for (int i = 0; i < n1; i++)
+	{ 
+		Left.push_back(*advance(list.begin(), start + i)); // std:next : gives next iterator, at pos n after the start pos
+	}
 
-    // Merge the sorted halves
-    return mergeLists(left, right);
+	for (int i = 0; i < n2; i++)
+	{
+		Right.push_back(*advance(list.begin(), mid + 1 + i));
+	}
+
+	int RIDX = 0;
+	int LIDX = 0;
+
+	for (int i = start; i <= end; i++) // sorting+merging the split arrays into int_vec, starts each round at 0
+	{
+		if (RIDX == n2)
+		{
+			*advance(list.begin(), i) = Left.front(); // front returns reference to first element in the list
+			Left.pop_front();
+			LIDX++;
+		}
+		else if (LIDX == n1)
+		{
+			*advance(list.begin(), i) = Right.front();
+			Right.pop_front();
+			RIDX++;
+		}
+		else if (Right.front() > Left.front())
+		{
+			*advance(list.begin(), i) = Left.front(); // insert front element from left array into list at post after i;
+			Left.pop_front(); // then take it out
+			LIDX++;
+		}
+		else
+		{
+			*advance(list.begin(), i) = Right.front();
+			Right.pop_front();
+			RIDX++;
+		}
+	}
+}
+
+static void insertionSortList(std::list<unsigned int>& list, int start, int end ) {
+	
+	for (int i = start; i < end; i++)
+	{
+        unsigned int tempVal = *advance(list.begin(), i + 1);
+        int j = i + 1;
+        while (j > start && *advance(list.begin(), j - 1) > tempVal) // if curr pos is bigger than next pos
+		{
+            *advance(list.begin(), j) = *advance(list.begin(), j - 1);
+            j--; // count down till 0
+        }
+        *advance(list.begin(), j) = tempVal; //insert element at correct position
+	}
+}
+
+static void mergeInsertList(std::list<unsigned int>& list, int start, int end ) {
+	if (end - start > 2) // divide into paired groups until num of groups wanted reached
+	{
+		int mid = ( start + end ) / 2;
+		mergeInsertList(list, start, mid);
+		mergeInsertList(list, mid + 1, end); 
+		mergeList(list, start, mid, end);
+	}
+	else
+	{
+		insertionSortList(list, start, end);
+	}
 }
 
 void PmergeMe::sortList(int argc, char **argv){
@@ -203,8 +259,7 @@ void PmergeMe::sortList(int argc, char **argv){
 
 	std::clock_t start = std::clock();
 
-	storage = mergeInsertList(storage);
-
+	mergeInsertList(storage, 0, storage.size() - 1);
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 
     std::cout << "<list>After: ";

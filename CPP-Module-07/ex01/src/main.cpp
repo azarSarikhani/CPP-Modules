@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:03:53 by asarikha          #+#    #+#             */
-/*   Updated: 2023/09/21 16:20:01 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:27:23 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,29 @@
 // 	int intArray[] = { 1, 2, 3, 4, 5 };
 // 	std::cout << "printing members" << std::endl;
 // 	iter(intArray, 5, &print);
-// 	//std::cout << "printing incremented  members" << std::endl;
-// 	//iter(intArray, 5, &printIncrementedMember); //
+// 	// std::cout << "printing incremented  members" << std::endl;
+// 	// iter(intArray, 5, &printIncrementedMember); //
 
 // 	std::cout << std::endl;
 // 	double doubleArray[] = { 1.5, 2.3, 3.9, 4.4, 5.18 };
 // 	std::cout << "printing members" << std::endl;
 // 	iter(doubleArray, 5, &print);
-// 	//std::cout << "printing incremented  members" << std::endl;
-// 	//iter(doubleArray, 5, &printIncrementedMember); //
+// 	// std::cout << "printing incremented  members" << std::endl;
+// 	// iter(doubleArray, 5, &printIncrementedMember); //
 
 // 	std::cout << std::endl;
 // 	char charArray[] = { 'a', 'c', 'q', 'e', 'w' };
 // 	std::cout << "printing members" << std::endl;
 // 	::iter(charArray, 5, &print);
-// 	//std::cout << "printing incremented  members" << std::endl;
-// 	//iter(charArray, 5, &printIncrementedMember); //
+// 	// std::cout << "printing incremented  members" << std::endl;
+// 	// iter(charArray, 5, &printIncrementedMember); //
 
 // 	std::cout << std::endl;
 // 	std::string strinngArray[] = { "aka", "cd", "wtf", "brb", "byob" };
 // 	std::cout << "printing members" << std::endl;
 // 	iter(strinngArray, 5, &print);
-// 	//std::cout << "printing incremented  members" << std::endl;
-// 	//iter(strinngArray, 5, &printIncrementedMember); //
+// 	// std::cout << "printing incremented  members" << std::endl;
+// 	// iter(strinngArray, 5, &printIncrementedMember); //
 
 	
 // 	return 0;
