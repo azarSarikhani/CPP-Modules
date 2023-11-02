@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/20 11:13:29 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:39:34 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main (int argc, char* argv[]){
 	if (argc != 2)
-		return (std::cout << "RPN must recieve arguments." << std::endl, 0);
+		return (std::cout << "RPN must recieve one argument." << std::endl, 0);
 	RPN rpn;
 	std::string input = argv[1];
 	try
@@ -25,7 +25,7 @@ int main (int argc, char* argv[]){
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 	
 	return 0;

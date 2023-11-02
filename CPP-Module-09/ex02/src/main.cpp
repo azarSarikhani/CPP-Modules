@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:35 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/31 15:50:24 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:36:40 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int main ( int argc, char* argv[] ){
         // }
     }
     catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
         return EXIT_FAILURE;
     }
 	pmm.sortVec(argc, argv);

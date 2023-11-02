@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/30 11:44:50 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:37:50 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	RPN::calculateResult(std::string& input){
         else
             this->operationStack.push(ft_stoi(s));
     }
+    if (operationStack.size() > 1)
+        throw (std::runtime_error ("Wrong format!"));
 	std:: cout << "The final result is " <<  this->operationStack.top() << std::endl;
 	return ;
 }

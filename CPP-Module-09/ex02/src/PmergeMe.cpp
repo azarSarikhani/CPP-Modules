@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:38 by asarikha          #+#    #+#             */
-/*   Updated: 2023/11/01 13:45:28 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:59:32 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ void PmergeMe::sortVec(int argc, char **argv){
 
 	std::clock_t start = std::clock();
 	mergeInsertVec(storage, 0, storage.size() - 1);
-    // merge_insert_vec(storage, 0, int_vec.size() - 1);
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 
 	std::cout << "<vec>After: ";

@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 10:50:50 by asarikha          #+#    #+#             */
-/*   Updated: 2023/10/23 11:01:21 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:33:18 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ bool	BitcoinExchange::isDateInCorrectFormatAndValid(const std::string &date){
 	int year = ft_stof(date.substr(0, 4));
 	int month = ft_stof(date.substr(5, 2));
 	int day = ft_stof(date.substr(8, 2));
-	
-	
+	// if ((day == 29 && month == 2 && year % 4 == 0))
+	// 	std::cout << "yo" << std::endl;
 	if ( year < 0 || month < 1 || month > 12 || day > 31 || day < 1 )
 		return false;
 	if ( (day == 31 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11))
-			||  (day > 29 && month == 2 && year % 4 == 0) || (day > 28 && month == 2))
+			||  (day > 29 && month == 2 && year % 4 == 0) || (day > 28 && month == 2 && year % 4 != 0))
 		return false;
+	//std::cout << "day :" << day << " month :" << month << " year : " << year << " year % 4 " << year % 4 << std::endl;
 	return true;
 }
 
@@ -169,6 +170,6 @@ void	BitcoinExchange::parseInput(const std::string &inputFile){
 			std::cerr << "Error: bad date" << std::endl;
 			continue ;
 		}
-		std::cout << date << " => " << num << " = " << std::fixed << std::setprecision(2) << num * Rate << std::endl;		
+		std::cout << date << " => " << std::fixed << std::setprecision(2) << num << " = " << std::fixed << std::setprecision(2) << num * Rate << std::endl;		
     }
 }
