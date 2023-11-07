@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:35 by asarikha          #+#    #+#             */
-/*   Updated: 2023/11/02 11:36:40 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:27:53 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 unsigned int ft_stou(const std::string& str)
 {
+    if ( str.empty() )
+        throw (std::invalid_argument ("Input can not be empty!"));
     if (str.length() > 10)
         throw (std::invalid_argument ( "input should be whithin the range of unsigned int" ));
     unsigned int num;
@@ -60,9 +62,7 @@ int main ( int argc, char* argv[] ){
         return EXIT_FAILURE;
     }
 	pmm.sortVec(argc, argv);
-    // merge_insert_vec(int_vec, 0, int_vec.size() - 1); // -1 because last element is unpaired
     std::cout << std::endl;
     pmm.sortList(argc, argv);
-    // merge_insert_list(int_list, 0, int_list.size() - 1); // -1 because last element is unpaired in insertion sort
 	return 0;
 }

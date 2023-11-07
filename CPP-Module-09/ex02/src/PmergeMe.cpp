@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:57:38 by asarikha          #+#    #+#             */
-/*   Updated: 2023/11/02 12:59:32 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:04:34 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void PmergeMe::sortVec(int argc, char **argv){
 	
 	std::vector<unsigned int> storage;
 
+	std::clock_t start = std::clock();
 	for (int i = 1; i < argc; i += 1) {
 		storage.push_back(ft_stou(argv[i]));
 	}
@@ -133,7 +134,6 @@ void PmergeMe::sortVec(int argc, char **argv){
 	std::cout << "<vec>Before: ";
 	printVec(storage);
 
-	std::clock_t start = std::clock();
 	mergeInsertVec(storage, 0, storage.size() - 1);
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 
@@ -250,13 +250,13 @@ void PmergeMe::sortList(int argc, char **argv){
 	
 	std::list<unsigned int> storage;
 
+	std::clock_t start = std::clock();
 	for (int i = 1; i < argc; i += 1)
 		storage.push_back(ft_stou(argv[i]));
 
     std::cout << "<list>Before: ";
 	printList(storage);
 
-	std::clock_t start = std::clock();
 
 	mergeInsertList(storage, 0, storage.size() - 1);
 	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;

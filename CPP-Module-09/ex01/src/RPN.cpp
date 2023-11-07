@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
-/*   Updated: 2023/11/02 11:37:50 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:23:27 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int RPN::ft_stoi(const std::string& str)
 }
 
 void	RPN::validateInput(std::string& input){
-	if (!(input.find_first_not_of("0123456789+-/* ") == std::string::npos))
+	if ( input.empty() )
+        throw (std::invalid_argument ("Input can not be empty!"));
+    if (!(input.find_first_not_of("0123456789+-/* ") == std::string::npos))
 	    throw (std::invalid_argument ("Non-numeric characters can not be operated on neither numbers with decimals!"));
 	std::stringstream exprecion(input);
     std::string s;
