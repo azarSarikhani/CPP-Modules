@@ -6,7 +6,7 @@
 /*   By: asarikha <asarikha@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:01:05 by asarikha          #+#    #+#             */
-/*   Updated: 2023/11/07 09:23:27 by asarikha         ###   ########.fr       */
+/*   Updated: 2023/11/08 09:21:32 by asarikha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ int RPN::ft_stoi(const std::string& str)
 void	RPN::validateInput(std::string& input){
 	if ( input.empty() )
         throw (std::invalid_argument ("Input can not be empty!"));
+    size_t startPos = input.find_first_of("0123456789+-/*");
+    if (startPos == std::string::npos)
+        throw (std::invalid_argument ("Input can not be empty!"));
     if (!(input.find_first_not_of("0123456789+-/* ") == std::string::npos))
 	    throw (std::invalid_argument ("Non-numeric characters can not be operated on neither numbers with decimals!"));
-	std::stringstream exprecion(input);
+    std::stringstream expressions(input);
     std::string s;
-	while (exprecion >> s){
-        //std::cout << "s : " << s << std::endl;
+    
+	while (expressions >> s){
 		if ( s[0] == '-' && !(s.find_first_of("0123456789") == std::string::npos) )
 			throw (std::invalid_argument ("Negetive inputs are not allowd as an input!"));
         if ( s.find_first_of("0123456789") != std::string::npos && s.length() > 1 )
